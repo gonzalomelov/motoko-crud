@@ -61,4 +61,12 @@ actor {
       }
     }
   };
+
+  public query func getAllMembers(): async [Member] {
+    return Iter.toArray(members.vals());
+  };
+
+  public query func numberOfMembers(): async Nat {
+    return members.size();
+  };
 }
