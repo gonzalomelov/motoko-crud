@@ -21,7 +21,7 @@ actor {
         members.put(caller, member);
         return #ok;
       };
-      case (?member) {
+      case (?_) {
         return #err("Member already exists in our application");
       }
     }
