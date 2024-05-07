@@ -26,4 +26,39 @@ actor {
       }
     }
   };
+
+  public shared ({ caller }) func deleteMember(): async Result<(), Text> {
+    switch (members.get(caller)) {
+      case (null) {
+        return #err("Member does not exist in our application");
+      };
+      case (?_) {
+        members.delete(caller);
+        return #ok;
+      }
+    }
+  };
+
+  public shared ({ caller }) func updateMember(newMember: Member): async Result<(), Text> {
+    switch (members.get(caller)) {
+      case (null) {
+        return #err("Member does not exist in our application");
+      };
+      case (?_) {
+        members.put(caller, newMember);
+        return #ok;
+      }
+    }
+  };
+
+  public query ({ caller }) func getMember(): async Result<?Member, Text> {
+    switch (members.get(caller)) {
+      case (null) {
+        return #err("Member does not exist in our application");
+      };
+      case (?member) {
+        return #ok(?member);
+      }
+    }
+  };
 }
